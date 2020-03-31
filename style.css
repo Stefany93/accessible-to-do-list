@@ -1,0 +1,43 @@
+.list {
+  display: inline-block;
+  padding-left: 0;
+}
+
+.focus {
+  border-bottom: 3px dotted red;
+}
+
+.task label,
+.task button,
+.task input {
+  margin-right: 7px;
+}
+
+.task {
+  margin-bottom: 10px;
+}
+
+.task:last-child {
+  font-weight: bold;
+}
+
+.task_input {
+  height: 39px;
+}
+.add_task {
+  height: 44px;
+  width: 44px;
+}
+.container {
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+}
+
+.content {
+  margin: auto;
+}
+
+.sc_feedback {
+  font-weight: bold;
+}
