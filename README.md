@@ -1,2 +1,2 @@
-# stefany.newman93-gmail.com
+# Accessible to do list 
 Accessible vanilla JavaScript to do list app 
