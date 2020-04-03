@@ -3,6 +3,7 @@ const list = document.querySelector('#list');
 const to_do_form = document.querySelector('#to_do_form');
 const sc_feedback = document.querySelector('#sc_feedback');
 const heading = document.querySelector('#heading');
+
 to_do_form.addEventListener('submit', function (event) {
   event.preventDefault();
   let task = to_do.value;
