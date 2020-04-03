@@ -7,7 +7,6 @@ const heading = document.querySelector('#heading');
 to_do_form.addEventListener('submit', function (event) {
   event.preventDefault();
   let task = to_do.value;
-
   showList();
   addTaskToDOM(task);
   removeValue(to_do);
