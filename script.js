@@ -3,7 +3,7 @@ const list = document.querySelector('#list');
 const to_do_form = document.querySelector('#to_do_form');
 const sc_feedback = document.querySelector('#sc_feedback');
 const heading = document.querySelector('#heading');
-to_do_form.addEventListener('submit', function(event) {
+to_do_form.addEventListener('submit', function (event) {
   event.preventDefault();
   let task = to_do.value;
 
@@ -14,9 +14,9 @@ to_do_form.addEventListener('submit', function(event) {
   ATFeedback(task);
 });
 
-list.addEventListener('click', function(event) {
+list.addEventListener('click', function (event) {
   console.log('clicked');
-  if (event.target.className == 'delete_task') {
+  if (hasClassName(event.target, 'delete_task')) {
     const li = event.target.closest('li');
     const taskName = event.target.previousSibling.textContent;
     deleteTask(li);
@@ -24,10 +24,6 @@ list.addEventListener('click', function(event) {
     moveFocus(heading);
   }
 });
-
-function deleteTaskConfirmation() {
-  return confirm('Are you sure you want to delete this task?');
-}
 
 function deleteTask(theTarget) {
   list.removeChild(theTarget);
@@ -41,13 +37,13 @@ function addTaskToDOM(task) {
   let taskItem = createElement('li', '', list, ['class', 'task']);
   let theCheckbox = createElement('input', null, taskItem, [
     'type',
-    'checkbox'
+    'checkbox',
   ]);
   let label = createElement('label', task, taskItem, ['for', newID]);
   theCheckbox.setAttribute('id', newID);
   let deleteButton = createElement('button', 'Delete Task', taskItem, [
     'class',
-    'delete_task'
+    'delete_task',
   ]);
 }
 
@@ -83,4 +79,10 @@ function generateID() {
 
 function moveFocus(element) {
   element.focus();
+}
+function hasClassName(element, className) {
+  if (element.classList.contains(className)) {
+    return true;
+  }
+  return false;
 }
