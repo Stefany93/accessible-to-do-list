@@ -15,7 +15,6 @@ to_do_form.addEventListener('submit', function (event) {
 });
 
 list.addEventListener('click', function (event) {
-  console.log('clicked');
   if (hasClassName(event.target, 'delete_task')) {
     const li = event.target.closest('li');
     const taskName = event.target.previousSibling.textContent;
