@@ -9,7 +9,6 @@ to_do_form.addEventListener('submit', function (event) {
   let task = to_do.value;
 
   showList();
-
   addTaskToDOM(task);
   removeValue(to_do);
   ATFeedback(task);
