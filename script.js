@@ -4,6 +4,9 @@ const to_do_form = document.querySelector('#to_do_form');
 const sc_feedback = document.querySelector('#sc_feedback');
 const heading = document.querySelector('#heading');
 
+/*
+  Execute functions on submit of the form
+*/
 to_do_form.addEventListener('submit', function (event) {
   event.preventDefault();
   let task = to_do_input.value;
@@ -12,10 +15,16 @@ to_do_form.addEventListener('submit', function (event) {
   screenReaderFeedback(task);
 });
 
+/*
+  We are using Event Bubbling to listen to when the <ul> element
+  that keeps the tasks is clicked. When it is clicked, if the click
+  originates on the delete button, then we execute the delete 
+  task functionality. 
+*/
 list.addEventListener('click', function (event) {
   if (hasClassName(event.target, 'delete_task')) {
-    const li = event.target.closest('li');
-    const taskName = event.target.previousElementSibling.textContent;
+    const li = event.target.closest('li'); // Find the parent <li> of the clicked delete button
+    const taskName = event.target.previousElementSibling.textContent; // Get the task text
     deleteTask(li);
     moveFocus(heading);
     screenReaderFeedback(taskName, 'removed');
@@ -26,6 +35,10 @@ function deleteTask(theTarget) {
   list.removeChild(theTarget);
 }
 
+/*
+  We generate a new <li>, <input type="checkbox">, and <button>
+  each time a task is added to the DOM. 
+*/
 function addTaskToDOM(task) {
   let newID = generateID();
   let taskItem = createElement('li', '', list, ['class', 'task']);
@@ -58,10 +71,22 @@ function createElement(tagName, textNode, parent, attribute = null) {
 function removeValue(input) {
   input.value = '';
 }
+/*
+  Sighted users are able to see when a task is added, but screen reader
+  users are more likely to be blind, so we want to make the 
+  screen reader voice the actions. 
+  We use the #sc_feedback element in the DOM to populate 
+  the text which would be voiced
+*/
 function screenReaderFeedback(task, feedback = 'added') {
   sc_feedback.textContent = `${task} ${feedback}.`;
 }
 
+/*
+  We want the checkbox to go before the label,
+  so we need to connect the labels to the inputs
+  with IDs. 
+*/
 function generateID() {
   let idPrefix = 'task_num_';
   let tasks = document.querySelectorAll('#list > li');
@@ -75,6 +100,11 @@ function moveFocus(element) {
   element.focus();
 }
 function hasClassName(element, className) {
+  /*
+    We are using classList.contains() instead
+    of element.className because an element may
+    have multiple classes
+  */
   if (element.classList.contains(className)) {
     return true;
   }
