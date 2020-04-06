@@ -1,4 +1,4 @@
-const to_do = document.querySelector('#todo');
+const to_do_input = document.querySelector('#todo');
 const list = document.querySelector('#list');
 const to_do_form = document.querySelector('#to_do_form');
 const sc_feedback = document.querySelector('#sc_feedback');
@@ -6,20 +6,19 @@ const heading = document.querySelector('#heading');
 
 to_do_form.addEventListener('submit', function (event) {
   event.preventDefault();
-  let task = to_do.value;
-  showList();
+  let task = to_do_input.value;
   addTaskToDOM(task);
-  removeValue(to_do);
-  ATFeedback(task);
+  removeValue(to_do_input);
+  screenReaderFeedback(task);
 });
 
 list.addEventListener('click', function (event) {
   if (hasClassName(event.target, 'delete_task')) {
     const li = event.target.closest('li');
-    const taskName = event.target.previousSibling.textContent;
+    const taskName = event.target.previousElementSibling.textContent;
     deleteTask(li);
-    ATFeedback(taskName, 'removed');
     moveFocus(heading);
+    screenReaderFeedback(taskName, 'removed');
   }
 });
 
@@ -27,9 +26,6 @@ function deleteTask(theTarget) {
   list.removeChild(theTarget);
 }
 
-function showList() {
-  list.removeAttribute('hidden');
-}
 function addTaskToDOM(task) {
   let newID = generateID();
   let taskItem = createElement('li', '', list, ['class', 'task']);
@@ -62,7 +58,7 @@ function createElement(tagName, textNode, parent, attribute = null) {
 function removeValue(input) {
   input.value = '';
 }
-function ATFeedback(task, feedback = 'added') {
+function screenReaderFeedback(task, feedback = 'added') {
   sc_feedback.textContent = `${task} ${feedback}.`;
 }
 
