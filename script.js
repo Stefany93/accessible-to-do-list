@@ -93,7 +93,9 @@ function generateID() {
   if (tasks.length == 0) {
     return `${idPrefix}0`;
   }
-  return idPrefix + tasks.length;
+  let lastTask = document.querySelector('#list > li:last-child > input');
+  let lastIDNum = Number(lastTask.id.replace(idPrefix, ''));
+  return idPrefix + (lastIDNum + 1);
 }
 
 function moveFocus(element) {
